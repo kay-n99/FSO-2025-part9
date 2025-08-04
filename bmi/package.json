@@ -17,5 +17,8 @@
     "url": "https://github.com/kay-n99/FSO-2025-part9/issues"
   },
   "homepage": "https://github.com/kay-n99/FSO-2025-part9#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.1.0"
+  }
 }

@@ -1,4 +1,29 @@
 interface Values {
+  target: number;
+  dailyHours: number[];
+}
+
+export const parseArgs = (args: string[]): Values => {
+  if (args.length < 3) throw new Error('Not enough arguments');
+
+  const target = Number(args[2]);
+  const dailyHours = args.slice(3).map(Number);
+
+  if (isNaN(target)) {
+    throw new Error('Provided target was not a number!');
+  }
+  if (dailyHours.some(isNaN)) { 
+    throw new Error('Provided daily hours contain non-numeric values!');
+  }
+
+  return {
+    target,
+    dailyHours
+  }
+
+}
+
+interface Result {
   periodLength: number;
   trainingDays: number;
   success: boolean;
@@ -8,7 +33,7 @@ interface Values {
   average: number;
 }
 
-function calculateExercises(dailyHours: number[], target: number): Values {
+function calculateExercises(dailyHours: number[], target: number): Result {
   const periodLength = dailyHours.length;
   const trainingDays = dailyHours.filter(hours => hours > 0).length;
   const average = dailyHours.reduce((sum, hours) => sum + hours, 0) / periodLength;
@@ -40,11 +65,9 @@ function calculateExercises(dailyHours: number[], target: number): Values {
 }
 
 
-const exerciseHours = [3, 0, 2, 4.5, 0, 3, 1];
-const targetHours = 2;
-
 try {
-  console.log(calculateExercises(exerciseHours, targetHours));
+  const { target, dailyHours } = parseArgs(process.argv);
+  console.log(calculateExercises(dailyHours, target));
 } catch (error: unknown) {
   let errorMessage = 'Something went wrong: ';
   if (error instanceof Error) {
