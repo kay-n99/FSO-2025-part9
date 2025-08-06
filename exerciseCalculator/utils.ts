@@ -13,8 +13,8 @@ export const parseArguments = (args: string[]): Values => {
     return {
       target,
       dailyHours
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};

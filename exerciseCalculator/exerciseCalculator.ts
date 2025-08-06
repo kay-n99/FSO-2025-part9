@@ -3,7 +3,7 @@ interface Values {
   dailyHours: number[];
 }
 
-export const parseArgs = (args: string[]): Values => {
+ const parseArgs = (args: string[]): Values => {
   if (args.length < 3) throw new Error('Not enough arguments');
 
   const target = Number(args[2]);
@@ -19,9 +19,9 @@ export const parseArgs = (args: string[]): Values => {
   return {
     target,
     dailyHours
-  }
+  };
 
-}
+};
 
 interface Result {
   periodLength: number;
@@ -75,3 +75,5 @@ try {
   }
   console.log(errorMessage);
 }
+
+export default calculateExercises;
