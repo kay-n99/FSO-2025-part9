@@ -6,3 +6,5 @@ export interface Diary {
   visibility: "great" | "good" | "ok" | "poor";
   comment?: string;
 }
+
+export type NewDiaryEntry = Omit<Diary, "id">;
