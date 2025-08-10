@@ -1,8 +1,5 @@
-type TotalProps = {
-    total: number;
-};
 
-const Total = ({ total }: TotalProps) => {
+const Total = ({ total }: {total: number}) => {
     return <p>Number of exercises {total}</p>;
 }
 
