@@ -16,7 +16,7 @@ const toNewEntry = (object:any): Entry => {
     };
 
     switch(object.type) {
-        case "hospital":
+        case "Hospital":
             return {
                 ...baseEntry,
                 type: "Hospital",

@@ -13,16 +13,15 @@ const EntryDetails = ({ entry }: EntryDetailsProps) => {
     switch(entry.type){
         case "Hospital":
             return (
-                <div style={{ border: "1px solid gray", padding: "0.5 rem", marginBottom: "0.5 rem"}}>
-                    <p>
-                        <strong>{entry.date}</strong><LocalHospital /> <br />
-                        {entry.description}
-                    </p>
-                    <p>
-                        Discharge: { entry.discharge.date} - {entry.discharge.criteria}
-                    </p>
-                </div>
-            );
+            <div>
+              <p><strong>{entry.date}</strong> (Hospital): {entry.description}</p>
+              <p>Discharge date: {entry.discharge.date}</p>
+              <p>Criteria: {entry.discharge.criteria}</p>
+              {entry.diagnosisCodes && (
+                <ul>{entry.diagnosisCodes.map(code => <li key={code}>{code}</li>)}</ul>
+              )}
+            </div>
+          );
         case "OccupationalHealthcare":
             return (
         <div style={{ border: "1px solid gray", padding: "0.5rem", marginBottom: "0.5rem" }}>
