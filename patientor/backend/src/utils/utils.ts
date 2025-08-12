@@ -1,5 +1,6 @@
-import { NewPatient, Gender } from './types/types';
+import { NewPatient, Gender } from '../types/types';
 import { z } from 'zod';
+import { Diagnosis } from '../types/types';
 
 // Type guard for string
 const isString = (text: unknown): text is string => {
@@ -49,6 +50,13 @@ const parseOccupation = (occupation: unknown): string => {
     throw new Error('Invalid or missing occupation');
   }
   return occupation;
+};
+
+export const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> => {
+  if(!object || typeof object !== 'object' || !('diagnosisCodes' in object)){
+    return [] as Array<Diagnosis['code']>;
+  }
+  return object.diagnosisCodes as Array<Diagnosis['code']>;
 };
 
 // Main parser function

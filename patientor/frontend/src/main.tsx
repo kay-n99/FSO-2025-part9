@@ -4,21 +4,24 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PatientListPage from "./components/PatientListPage";
 import PatientPage from "./components/PatientPage";
-import { Patient } from "./types";
+import { Patient, Diagnosis } from "./types";
 import patientService from "./services/patients";
+import diagnosisService from "./services/diagnoses";
 
 const App = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
+  const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
 
   useEffect(() => {
     patientService.getAll().then(data => setPatients(data));
+    diagnosisService.getAll().then(data => setDiagnoses(data));
   }, []);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PatientListPage patients={patients} setPatients={setPatients} />} />
-        <Route path="/patients/:id" element={<PatientPage />} />
+        <Route path="/patients/:id" element={<PatientPage diagnoses={diagnoses} />} />
       </Routes>
     </BrowserRouter>
   );
